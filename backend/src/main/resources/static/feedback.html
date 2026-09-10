@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Feedback(VartAlaap)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/jpeg" href="./vlogo.jpeg" />
+    <link rel="shortcut icon" type="image/jpeg" href="./vlogo.jpeg" />
+
+    <style>
+      body {
+        font-family: Arial;
+        background: #f4f7fb;
+      }
+      .container {
+        width: 90%;
+        max-width: 500px;
+        margin: 40px auto;
+        background: #2cbcdc;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      input,
+      textarea {
+        width: 95%;
+        padding: 10px;
+        margin: 10px 0;
+      }
+      button {
+        background: lightyellow;
+        color: rgb(0, 0, 0);
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        font-family:cursive;
+      }
+      button:hover {
+        background: #df78e7;
+      }
+      a {
+        text-decoration: none;
+      }
+      .btn {
+        background: lightyellow;
+        color: black;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        font-family:cursive;
+      }
+      .btn:hover {
+        background: #df78e7;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Feedback</h2>
+
+      <form id="form">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <textarea id="msg" placeholder="Your Feedback" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+
+      <br />
+      <button onclick="window.location.href = './help.html'" class="btn">
+        Back
+      </button>
+      <button onclick="window.location.href = './register.html'" class="btn">
+        Register
+      </button>
+    </div>
+
+    <script>
+      document.getElementById("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert("Thanks for your feedback!");
+        this.reset();
+      });
+    </script>
+  </body>
+</html>

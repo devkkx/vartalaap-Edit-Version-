@@ -1,0 +1,562 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Register - Vartalaap</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/jpeg" href="./vlogo.jpeg" />
+    <link rel="shortcut icon" type="image/jpeg" href="./vlogo.jpeg" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* MAIN CONTAINER */
+      .container {
+        display: flex;
+        width: 100%;
+        flex: 1;
+      }
+
+      /* LEFT SIDE */
+      .left {
+        flex: 1.2;
+        position: relative;
+        overflow: hidden;
+        background: #df78e7;
+      }
+
+      /* FULL IMAGE */
+      .left img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #df78e7;
+        margin-bottom: 0px;
+      }
+
+      /* DARK OVERLAY */
+      .left::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.35);
+        top: 0;
+        left: 0;
+      }
+
+      /* 🔥 BOUNCE ANIMATION */
+      @keyframes bounceIn {
+        0% {
+          transform: translate(-50%, -140px) scale(0.85);
+          opacity: 0;
+        }
+
+        20% {
+          transform: translate(-50%, 40px) scale(1.08);
+          opacity: 1;
+        }
+
+        35% {
+          transform: translate(-50%, -20px) scale(0.95);
+        }
+
+        50% {
+          transform: translate(-50%, 15px) scale(1.02);
+        }
+
+        65% {
+          transform: translate(-50%, -8px) scale(0.98);
+        }
+
+        80% {
+          transform: translate(-50%, 4px) scale(1.01);
+        }
+
+        90% {
+          transform: translate(-50%, -2px) scale(0.995);
+        }
+
+        100% {
+          transform: translate(-50%, 0) scale(1);
+        }
+      }
+
+      /* TITLE */
+      .brand {
+        position: absolute;
+        top: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #ffffff;
+        font-size: 42px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        z-index: 2;
+
+        animation: bounceIn 2s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* RIGHT SIDE */
+      .right {
+        flex: 0.7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #2cbcdc;
+        padding: 20px 15px;
+        overflow-y: auto;
+      }
+
+      /* CARD */
+      .card {
+        width: 360px;
+        max-width: 95%;
+        max-height: 88vh;
+        overflow-y: auto;
+        background: white;
+        padding: 20px 24px;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-3px);
+      }
+
+      /* LOGO */
+      .logo img {
+        width: 110px;
+        margin-bottom: 6px;
+      }
+
+      /* INPUTS */
+      input {
+        width: 100%;
+        padding: 10px 12px;
+        margin-top: 8px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: 0.2s;
+      }
+
+      input:focus {
+        border-color: #118ab2;
+        box-shadow: 0 0 5px rgba(17, 138, 178, 0.3);
+      }
+
+      /* BUTTON */
+      button {
+        width: 100%;
+        padding: 10px 12px;
+        margin-top: 12px;
+        border: none;
+        background: linear-gradient(135deg, #2cbcdc, #0f6f91);
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        transform: scale(1.03);
+      }
+
+      /* LINK */
+      .link {
+        margin-top: 12px;
+        font-size: 14px;
+      }
+
+      .link a {
+        color: #118ab2;
+        text-decoration: none;
+      }
+
+      .link a:hover {
+        text-decoration: underline;
+      }
+
+      /* FOOTER FIX */
+      .footer {
+        position: static;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        background: linear-gradient(135deg, #df78e7, #2cbcdc);
+        color: white;
+        font-size: 14px;
+        margin-top: 0px;
+      }
+      .footer a {
+        color: white;
+        text-decoration: none;
+        margin: 0 8px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+
+        .left {
+          height: 40vh;
+          background-color: #df78e7;
+        }
+
+        .right {
+          justify-content: center;
+          padding: 20px;
+        }
+        /* 🔥 MOBILE RESPONSIVE FIX (SAFE) */
+
+        body {
+          align-items: flex-start;
+        }
+
+        /* FULL SCREEN CHAT */
+        .chat-container {
+          width: 100%;
+          height: 100vh;
+          border-radius: 0;
+        }
+
+        /* HEADER */
+        .chat-header {
+          height: 50px;
+          font-size: 16px;
+        }
+
+        /* ONLINE USERS */
+        .online-bar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 5px;
+        }
+
+        .color-picker {
+          width: 100%;
+        }
+
+        /* FILTERS SCROLLABLE */
+        .chat-filters {
+          display: flex;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+
+        .chat-filters button {
+          flex: 0 0 auto;
+        }
+
+        /* CHAT BODY */
+        .chat-body {
+          padding: 8px;
+        }
+
+        /* MESSAGES */
+        .message {
+          max-width: 85%;
+          font-size: 13px;
+        }
+
+        .send-btn {
+          width: 40px;
+          height: 38px;
+          font-size: 16px;
+        }
+
+        /* LOGIN & REGISTER FIX */
+
+        .container {
+          flex-direction: column;
+        }
+
+        .left {
+          height: 35vh;
+        }
+
+        .right {
+          padding: 20px;
+          justify-content: center;
+        }
+
+        .card {
+          width: 100%;
+          max-width: 320px;
+        }
+
+        .footer {
+          width: 100%;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- LEFT IMAGE -->
+      <div class="left">
+        <h1 class="brand" style="font-family: cursive">VartAlaap</h1>
+        <img src="./picl.png" alt="Left Image" />
+      </div>
+
+      <!-- RIGHT FORM -->
+      <div class="right">
+        <div class="card">
+          <!-- LOGO -->
+          <div class="logo">
+            <img src="./vlogo.jpeg" alt="Logo" />
+          </div>
+
+          <h2 style="font-family: cursive">Register</h2>
+
+          <!-- 🔥 REGISTRATION FORM WITH EMAIL OTP VERIFICATION -->
+          <form onsubmit="register(event)">
+            <input id="username" placeholder="Username" required />
+
+            <!-- Email & Send OTP Group -->
+            <div style="display: flex; gap: 6px; margin-bottom: 10px;">
+              <input id="email" type="email" placeholder="Email Address" required style="flex: 1; margin: 0;" />
+              <button type="button" id="sendOtpBtn" onclick="handleSendOtp()" style="width: auto; padding: 0 12px; font-size: 11px; background: #2cbcdc; color: #fff; border: none; border-radius: 6px; cursor: pointer; white-space: nowrap;">Send OTP</button>
+            </div>
+
+            <!-- OTP Input & Verify Group -->
+            <div id="otpSection" style="display: none; flex-direction: column; gap: 6px; margin-bottom: 10px; background: rgba(44, 188, 220, 0.08); padding: 10px; border-radius: 8px; border: 1px dashed #2cbcdc;">
+              <div style="display: flex; gap: 6px;">
+                <input id="otpCode" placeholder="Enter 6-digit OTP" maxLength="6" style="flex: 1; margin: 0; text-align: center; letter-spacing: 2px; font-weight: bold;" />
+                <button type="button" id="verifyOtpBtn" onclick="handleVerifyOtp()" style="width: auto; padding: 0 12px; font-size: 11px; background: #df78e7; color: #fff; border: none; border-radius: 6px; cursor: pointer; white-space: nowrap;">Verify OTP</button>
+              </div>
+              <div id="otpStatus" style="font-size: 11px; color: #38006c; text-align: center; margin-top: 2px;"></div>
+            </div>
+
+            <!-- Email Verified Badge -->
+            <div id="verifiedBadge" style="display: none; background: #d4edda; color: #155724; padding: 6px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; text-align: center; margin-bottom: 10px;">
+              ✅ Email Verified! Set password below.
+            </div>
+
+            <!-- Password Fields (Disabled until email verified) -->
+            <input
+              id="password"
+              type="password"
+              placeholder="Create Password (6-32 chars)"
+              required
+              disabled
+              minlength="6"
+              maxlength="32"
+              style="opacity: 0.6; cursor: not-allowed;"
+            />
+            <input
+              id="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
+              required
+              disabled
+              minlength="6"
+              maxlength="32"
+              style="opacity: 0.6; cursor: not-allowed; margin-top: 8px;"
+            />
+            <div style="font-size: 11px; color: #38006c; margin: 4px 0 10px 0; text-align: left;">🔒 Password range: 6 to 32 characters</div>
+
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                text-align: left;
+                gap: 10px;
+                margin: 15px 0;
+              "
+            >
+              <input
+                type="checkbox"
+                id="termsConsent"
+                name="termsConsent"
+                required
+                style="width: auto; margin: 0"
+              />
+              <label
+                for="termsConsent"
+                style="font-size: 12px; font-family: sans-serif"
+                >I affirm that I am 13 years of age or older and consent to the
+                Vartalaap Terms and Conditions.</label
+              >
+            </div>
+
+            <button type="submit" id="regSubmitBtn" disabled style="opacity: 0.6; cursor: not-allowed;">Register Account</button>
+          </form>
+
+          <p class="link">Already a user? <a href="login.html">Sign In</a></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let isEmailVerified = false;
+
+      async function handleSendOtp() {
+        const email = document.getElementById("email").value;
+        if (!email || !email.includes("@")) {
+          alert("Please enter a valid email address first.");
+          return;
+        }
+
+        const btn = document.getElementById("sendOtpBtn");
+        btn.disabled = true;
+        btn.innerText = "Sending...";
+
+        try {
+          const res = await fetch("/auth/send-otp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: email })
+          });
+          const data = await res.json();
+          btn.disabled = false;
+          btn.innerText = "Resend OTP";
+
+          if (data.success) {
+            document.getElementById("otpSection").style.display = "flex";
+            document.getElementById("otpStatus").innerText = data.message;
+            alert("📧 " + data.message);
+          } else {
+            alert("❌ " + (data.error || "Failed to send OTP email. Please check SMTP configuration."));
+          }
+        } catch (err) {
+          btn.disabled = false;
+          btn.innerText = "Send OTP";
+          alert("Network error sending OTP.");
+        }
+      }
+
+      async function handleVerifyOtp() {
+        const email = document.getElementById("email").value;
+        const otp = document.getElementById("otpCode").value;
+        if (!otp || otp.length !== 6) {
+          alert("Please enter the 6-digit OTP code.");
+          return;
+        }
+
+        try {
+          const res = await fetch("/auth/verify-otp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: email, otp: otp })
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            isEmailVerified = true;
+            document.getElementById("otpSection").style.display = "none";
+            document.getElementById("sendOtpBtn").style.display = "none";
+            document.getElementById("email").readOnly = true;
+            document.getElementById("verifiedBadge").style.display = "block";
+
+            // Unlock password & confirm password & submit button
+            const pwd = document.getElementById("password");
+            pwd.disabled = false;
+            pwd.style.opacity = "1";
+            pwd.style.cursor = "text";
+            pwd.focus();
+
+            const confirmPwd = document.getElementById("confirmPassword");
+            confirmPwd.disabled = false;
+            confirmPwd.style.opacity = "1";
+            confirmPwd.style.cursor = "text";
+
+            const regBtn = document.getElementById("regSubmitBtn");
+            regBtn.disabled = false;
+            regBtn.style.opacity = "1";
+            regBtn.style.cursor = "pointer";
+
+            alert("🎉 Email verified successfully! You can now create your password.");
+          } else {
+            alert("❌ " + (data.error || "Verification failed"));
+          }
+        } catch (err) {
+          alert("Error verifying OTP.");
+        }
+      }
+
+      function register(e) {
+        if (e) e.preventDefault();
+
+        if (!isEmailVerified) {
+          alert("Please verify your email address via OTP before creating your password.");
+          return;
+        }
+
+        let username = document.getElementById("username").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (!password || password.length < 6 || password.length > 32) {
+          alert("🔒 Password length must be between 6 and 32 characters.");
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          alert("❌ Passwords do not match. Please verify your confirm password field.");
+          return;
+        }
+
+        fetch("/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password,
+          }),
+        })
+          .then((res) => res.text())
+          .then((data) => {
+            alert(data);
+            if (data.toLowerCase().includes("success")) {
+              window.location.href = "login.html";
+            }
+          })
+          .catch((err) => console.error(err));
+      }
+    </script>
+
+    <footer class="footer">
+      © 2026 Vartalaap. All rights reserved.
+      <br />
+      <a href="help.html">Help</a> | <a href="feedback.html">Feedback</a> |
+      <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
+      <p>
+        Made by
+        <a
+          href="https://github.com/devkkx"
+          target="_blank"
+          rel="noopener noreferrer"
+          >devkkx</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>

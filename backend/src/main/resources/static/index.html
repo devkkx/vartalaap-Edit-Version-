@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vartalaap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/jpeg" href="./vlogo.jpeg" />
+    <link rel="shortcut icon" type="image/jpeg" href="./vlogo.jpeg" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <main class="chat-container">
+      <!-- Header -->
+      <header class="chat-header">
+        <!-- VartAlaap Logo Icon -->
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <img src="./vlogo.jpeg" alt="VartAlaap Logo" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(255,255,255,0.8);" />
+          <span class="app-title" style="font-family: cursive">VartAlaap</span>
+        </div>
+        <!-- Professional Feature Actions Dropdown -->
+        <div class="header-menu-container">
+          <button class="header-menu-btn" onclick="toggleHeaderMenu(event)" title="Menu Options">
+            <span>⚡ Menu ▾</span>
+          </button>
+          <div id="headerDropdown" class="header-dropdown-menu">
+            <div class="dropdown-item" onclick="triggerDropdownAction('tasks')">📌 Action Tasks</div>
+            <div class="dropdown-item" onclick="triggerDropdownAction('reminders')">🔔 Reminders</div>
+            <div class="dropdown-item" onclick="triggerDropdownAction('decision')">🧠 Decision Memory</div>
+            <div style="height: 1px; background: #eee; margin: 4px 0;"></div>
+            <div class="dropdown-item" onclick="logout()" style="color: #d9534f;">🚪 Logout</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- 🔥 TOP ROW -->
+      <aside class="online-bar">
+        <div class="top-row">
+          <!-- Filter -->
+          <select id="filter" class="filter-dropdown" onchange="filterMode()">
+            <option value="ALL">All Filter</option>
+            <option value="WORK">🧑‍💼 Work</option>
+            <option value="PERSONAL">💕 Personal</option>
+            <option value="STUDY">📚 Study</option>
+            <option value="CASUAL">🤙 Casual</option>
+          </select>
+
+          <!-- Color -->
+          <select id="color" class="color-picker">
+            <option value="">Default Color</option>
+            <option value="#2EE59D">Green 🟢</option>
+            <option value="#5EE6FF">Blue 🔵</option>
+            <option value="#FF66C4">Pink 🩷</option>
+            <option value="#FF7A00">Orange 🟠</option>
+          </select>
+
+          <!-- Users -->
+          <div id="users" class="online-users">
+            <strong>Online Users</strong>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Messages -->
+      <section id="messages" class="chat-body"></section>
+
+      <!-- Context Warning / Conflict Notification Banner -->
+      <div id="alertBanner" class="alert-banner" style="display:none;"></div>
+
+      <!-- Input -->
+      <footer class="chat-footer">
+        <select id="mode">
+          <option value="WORK">🧑‍💼 Work(Mode)</option>
+          <option value="PERSONAL">💕 Personal</option>
+          <option value="STUDY">📚 Study</option>
+          <option value="CASUAL">🤙 Casual</option>
+          <option value="AI">🧠 AI</option>
+        </select>
+        <!-- <select id="targetUser" style="display:none" disabled></select> -->
+        <button id="fileBtn">🔗‍️</button>
+        <button id="emojiBtn">😊</button>
+        <input type="text" id="message" placeholder="Type your message" />
+
+        <input type="file" id="fileInput" hidden />
+
+        <button class="send-btn" onclick="sendMessage()">➤</button>
+
+        <div id="emojiBox" class="emoji-box"></div>
+      </footer>
+    </main>
+
+    <!-- 📌 Task Management Drawer Overlay -->
+    <div id="taskDrawer" class="modal-overlay" style="display:none;">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>📌 Action Tasks</h3>
+          <button onclick="toggleTaskDrawer()">✖</button>
+        </div>
+        <div class="modal-body">
+          <form onsubmit="createTaskManual(event)" style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+            <input type="text" id="taskTitle" placeholder="Task description..." required style="padding:6px; font-size:12px; border-radius:6px; border:1px solid #ccc;" />
+            <div style="display:flex; gap:6px;">
+              <input type="text" id="taskAssignee" placeholder="Assignee (e.g. Rahul)" style="flex:1; padding:6px; font-size:12px; border-radius:6px; border:1px solid #ccc;" />
+              <input type="text" id="taskDeadline" placeholder="Deadline (e.g. Friday)" style="flex:1; padding:6px; font-size:12px; border-radius:6px; border:1px solid #ccc;" />
+            </div>
+            <button type="submit" style="background:#2cbcdc; color:#fff; border:none; padding:6px; border-radius:6px; font-family:cursive; cursor:pointer;">Add Task</button>
+          </form>
+          <div id="taskList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔔 Reminders Section Drawer Overlay -->
+    <div id="reminderDrawer" class="modal-overlay" style="display:none;">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>🔔 Scheduled Reminders</h3>
+          <button onclick="toggleReminderDrawer()">✖</button>
+        </div>
+        <div class="modal-body">
+          <form onsubmit="createReminderManual(event)" style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+            <input type="text" id="remTitle" placeholder="Reminder text (e.g. Finish Login Module)" required style="padding:6px; font-size:12px; border-radius:6px; border:1px solid #ccc;" />
+            <div style="display:flex; gap:6px;">
+              <input type="text" id="remTime" placeholder="Time/Date (e.g. 9:00 PM)" required style="flex:1; padding:6px; font-size:12px; border-radius:6px; border:1px solid #ccc;" />
+              <input type="text" id="remAssignee" placeholder="User (optional)" style="flex:1; padding:6px; font-size:12px; border-radius:6px; border:1px solid #ccc;" />
+            </div>
+            <button type="submit" style="background:#df78e7; color:#fff; border:none; padding:6px; border-radius:6px; font-family:cursive; cursor:pointer;">Set Reminder</button>
+          </form>
+          <div id="reminderList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🧠 Decision Memory Modal Overlay -->
+    <div id="decisionModal" class="modal-overlay" style="display:none;">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>🧠 Decision Memory</h3>
+          <button onclick="toggleDecisionModal()">✖</button>
+        </div>
+        <div class="modal-body">
+          <div style="display:flex; gap:6px; margin-bottom:10px;">
+            <input type="text" id="decisionQuery" placeholder="Ask e.g. What database did we decide to use?" style="flex:1; padding:6px; font-size:12px; border-radius:6px; border:1px solid #ccc;" />
+            <button onclick="askDecisionMemory()" style="background:#df78e7; color:#fff; border:none; padding:6px 12px; border-radius:6px; font-family:cursive; cursor:pointer;">Search</button>
+          </div>
+          <div id="decisionAnswer" style="padding:8px; background:#fafafa; border-radius:6px; font-size:13px; margin-bottom:8px;"></div>
+          <div id="decisionList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📄 Document Q&A Modal Overlay -->
+    <div id="docModal" class="modal-overlay" style="display:none;">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="docModalTitle">📄 Document Intelligence</h3>
+          <button onclick="closeDocModal()">✖</button>
+        </div>
+        <div class="modal-body">
+          <div id="docResultArea" style="padding:8px; background:#fafafa; border-radius:6px; font-size:13px; margin-bottom:10px; max-height:180px; overflow-y:auto;"></div>
+          <div style="display:flex; gap:6px;">
+            <input type="text" id="docQuestion" placeholder="Ask AI about this document..." style="flex:1; padding:6px; font-size:12px; border-radius:6px; border:1px solid #ccc;" />
+            <button onclick="submitDocQuestion()" style="background:#2cbcdc; color:#fff; border:none; padding:6px 12px; border-radius:6px; font-family:cursive; cursor:pointer;">Ask AI</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="chat.js?v=5"></script>
+  </body>
+</html>

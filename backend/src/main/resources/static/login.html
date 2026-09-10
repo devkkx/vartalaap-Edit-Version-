@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login - Vartalaap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/jpeg" href="./vlogo.jpeg" />
+    <link rel="shortcut icon" type="image/jpeg" href="./vlogo.jpeg" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      body {
+        height: 100vh;
+      }
+
+      /* CONTAINER */
+      .container {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+      }
+
+      /* LEFT */
+      .left {
+        flex: 1.2;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .left img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #df78e7;
+      }
+
+      /* OVERLAY */
+      .left::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.35);
+        top: 0;
+        left: 0;
+      }
+
+      /* 🔥 SAME BOUNCE */
+      @keyframes bounceIn {
+        0% {
+          transform: translate(-50%, -140px) scale(0.85);
+          opacity: 0;
+        }
+        20% {
+          transform: translate(-50%, 40px) scale(1.08);
+          opacity: 1;
+        }
+        35% {
+          transform: translate(-50%, -20px) scale(0.95);
+        }
+        50% {
+          transform: translate(-50%, 15px) scale(1.02);
+        }
+        65% {
+          transform: translate(-50%, -8px) scale(0.98);
+        }
+        80% {
+          transform: translate(-50%, 4px) scale(1.01);
+        }
+        100% {
+          transform: translate(-50%, 0) scale(1);
+        }
+      }
+
+      /* TITLE */
+      .brand {
+        font-family: cursive;
+        position: absolute;
+        top: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #ffffff;
+        font-size: 42px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        z-index: 2;
+        animation: bounceIn 2s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* RIGHT */
+      .right {
+        flex: 0.7;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background: #2cbcdc;
+        padding-right: 80px;
+      }
+
+      /* CARD */
+      .card {
+        width: 360px;
+        background: white;
+        padding: 35px;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-3px);
+      }
+
+      /* LOGO */
+      .logo img {
+        width: 150px;
+        margin-bottom: 10px;
+      }
+
+      /* INPUT */
+      input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: 0.2s;
+      }
+
+      input:focus {
+        border-color: #118ab2;
+        box-shadow: 0 0 5px rgba(17, 138, 178, 0.3);
+      }
+
+      /* BUTTON */
+      button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 18px;
+        border: none;
+        background: linear-gradient(135deg, #2cbcdc, #0f6f91);
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        transform: scale(1.03);
+      }
+
+      /* LINK */
+      .link {
+        margin-top: 15px;
+        font-size: 14px;
+      }
+
+      .link a {
+        color: #118ab2;
+        text-decoration: none;
+      }
+
+      .link a:hover {
+        text-decoration: underline;
+      }
+
+      /* ERROR */
+      .error {
+        color: red;
+        font-size: 13px;
+        margin-top: 10px;
+      }
+
+      /* FOOTER */
+      .footer {
+        position: static;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        background: linear-gradient(135deg, #df78e7, #2cbcdc);
+        color: white;
+        font-size: 14px;
+        margin-top: 0px;
+      }
+
+      .footer a {
+        color: white;
+        text-decoration: none;
+        margin: 0 8px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        .container {
+          flex-direction: column;
+        }
+
+        .left {
+          height: 40vh;
+        }
+
+        .right {
+          justify-content: center;
+          padding: 20px;
+        }
+      }
+      @media (max-width: 768px) {
+        body {
+          align-items: flex-start;
+        }
+
+        .chat-container {
+          width: 100%;
+          height: 100vh;
+          border-radius: 0;
+        }
+
+        .chat-header {
+          height: 50px;
+          font-size: 16px;
+        }
+
+        .online-bar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 5px;
+        }
+
+        .color-picker {
+          width: 100%;
+        }
+
+        .chat-filters {
+          display: flex;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+
+        .chat-filters button {
+          flex: 0 0 auto;
+        }
+
+        .chat-body {
+          padding: 8px;
+        }
+
+        .message {
+          max-width: 85%;
+          font-size: 13px;
+        }
+
+        .chat-footer {
+          position: sticky;
+          bottom: 0;
+          background: #f0f0f0;
+          padding: 6px;
+        }
+
+        .chat-footer input {
+          height: 38px;
+          font-size: 14px;
+        }
+
+        .send-btn {
+          width: 40px;
+          height: 38px;
+          font-size: 16px;
+        }
+
+        .container {
+          flex-direction: column;
+        }
+
+        .left {
+          height: 35vh;
+        }
+
+        .right {
+          padding: 20px;
+          justify-content: center;
+        }
+
+        .card {
+          width: 100%;
+          max-width: 320px;
+        }
+
+        .footer {
+          width: 100%;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- LEFT IMAGE -->
+      <div class="left">
+        <h1 class="brand" style="font-family: cursive">VartAlaap</h1>
+        <img src="./loginpic.png" alt="Login Image" />
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right">
+        <div class="card">
+          <div class="logo">
+            <img src="./vlogo.jpeg" alt="Logo" />
+          </div>
+
+          <h2 style="font-family: cursive">Login</h2>
+
+          <!-- FORM -->
+          <form onsubmit="login(event)">
+            <input id="username" placeholder="Username" required />
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              required
+            />
+
+            <button type="submit">Login</button>
+          </form>
+
+          <script src="login.js"></script>
+
+          <p id="error" class="error"></p>
+
+          <p class="link">New user? <a href="register.html">Register</a></p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      © 2026 Vartalaap. All rights reserved.
+
+      <br />
+      <a href="help.html">Help</a> | <a href="feedback.html">Feedback</a> |
+      <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
+
+      <p>
+        Made by
+        <a
+          href="https://github.com/devkkx"
+          target="_blank"
+          rel="noopener noreferrer"
+          >devkkx</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>
