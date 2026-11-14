@@ -53,13 +53,21 @@ public class ChatHandler extends TextWebSocketHandler {
             String sender = parts.length > 1 ? parts[1] : "User";
             String question = parts.length > 2 ? parts[2] : "";
 
+            // Save and broadcast user question
+            Message userMsg = new Message();
+            userMsg.setSender(sender);
+            userMsg.setReceiver("ALL");
+            userMsg.setContent(question);
+            userMsg.setMode("AI");
+            userMsg = messageRepository.save(userMsg);
+            broadcast("AI|" + sender + "|" + question + "|" + userMsg.getId());
+
             String aiReply;
 
             try {
                 aiReply = ollamaService.askAI(question);
             } catch (Exception e) {
-                e.printStackTrace();
-                aiReply = "AI response error: " + e.getMessage();
+                aiReply = "VarTalaap AI: I received your request (" + question + "), but could not generate a response. Please try again.";
             }
 
             // Save AI message
@@ -69,9 +77,9 @@ public class ChatHandler extends TextWebSocketHandler {
             msg.setContent(aiReply);
             msg.setMode("AI");
 
-            messageRepository.save(msg);
+            msg = messageRepository.save(msg);
 
-            broadcast("AI|AI|" + aiReply);
+            broadcast("AI|AI|" + aiReply + "|" + msg.getId());
             return;
         }
 
@@ -123,9 +131,9 @@ public class ChatHandler extends TextWebSocketHandler {
             msg.setContent(msgText);
             msg.setMode("PERSONAL");
 
-            messageRepository.save(msg);
+            msg = messageRepository.save(msg);
 
-            String finalMsg = "PERSONAL|" + sender + "|" + receiver + "|" + msgText;
+            String finalMsg = "PERSONAL|" + sender + "|" + receiver + "|" + msgText + "|" + msg.getId();
 
             sendToUser(sender, finalMsg);
             sendToUser(receiver, finalMsg);
@@ -142,9 +150,10 @@ public class ChatHandler extends TextWebSocketHandler {
         msg.setContent(msgText);
         msg.setMode(mode);
 
-        messageRepository.save(msg);
+        msg = messageRepository.save(msg);
 
-        broadcast(payload);
+        String finalMsg = mode + "|" + sender + "|" + msgText + "|" + msg.getId();
+        broadcast(finalMsg);
     }
 
     @Override
@@ -171,6 +180,17 @@ public class ChatHandler extends TextWebSocketHandler {
         for (WebSocketSession s : sessions) {
             if (s.isOpen()) {
                 s.sendMessage(new TextMessage(msg));
+            }
+        }
+    }
+
+    public static void broadcastStatic(String msg) {
+        for (WebSocketSession s : sessions) {
+            try {
+                if (s.isOpen()) {
+                    s.sendMessage(new TextMessage(msg));
+                }
+            } catch (Exception ignored) {
             }
         }
     }

@@ -16,14 +16,19 @@
       }
 
       body {
-        height: 100vh;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: #2cbcdc;
+        overflow-x: hidden;
       }
 
       /* CONTAINER */
       .container {
         display: flex;
+        flex: 1 0 auto;
         width: 100%;
-        height: 100vh;
+        min-height: calc(100vh - 65px);
       }
 
       /* LEFT */
@@ -31,17 +36,18 @@
         flex: 1.2;
         position: relative;
         overflow: hidden;
+        background: #df78e7;
+        min-height: 320px;
       }
 
       .left img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         object-position: center;
         position: absolute;
         top: 0;
         left: 0;
-        background: #df78e7;
       }
 
       /* OVERLAY */
@@ -86,57 +92,65 @@
       .brand {
         font-family: cursive;
         position: absolute;
-        top: 4px;
+        top: 15px;
         left: 50%;
         transform: translateX(-50%);
         color: #ffffff;
-        font-size: 42px;
+        font-size: 38px;
         font-weight: bold;
         letter-spacing: 2px;
         z-index: 2;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
         animation: bounceIn 2s cubic-bezier(0.22, 1, 0.36, 1);
       }
 
       /* RIGHT */
       .right {
-        flex: 0.7;
+        flex: 0.8;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
         background: #2cbcdc;
-        padding-right: 80px;
+        padding: 20px 24px;
+        overflow-y: auto;
       }
 
       /* CARD */
       .card {
-        width: 360px;
+        width: 100%;
+        max-width: 370px;
         background: white;
-        padding: 35px;
+        padding: 24px 28px;
         border-radius: 14px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         text-align: center;
         transition: 0.3s;
+        margin: auto;
       }
 
       .card:hover {
-        transform: translateY(-3px);
+        transform: translateY(-2px);
       }
 
       /* LOGO */
       .logo img {
-        width: 150px;
-        margin-bottom: 10px;
+        width: 85px;
+        height: auto;
+        border-radius: 50%;
+        margin-bottom: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
       }
 
       /* INPUT */
       input {
         width: 100%;
-        padding: 12px;
-        margin-top: 14px;
+        padding: 10px 12px;
+        margin-top: 10px;
         border: 1px solid #ccc;
         border-radius: 8px;
         outline: none;
         transition: 0.2s;
+        font-size: 14px;
       }
 
       input:focus {
@@ -147,30 +161,32 @@
       /* BUTTON */
       button {
         width: 100%;
-        padding: 12px;
-        margin-top: 18px;
+        padding: 11px 14px;
+        margin-top: 14px;
         border: none;
         background: linear-gradient(135deg, #2cbcdc, #0f6f91);
         color: white;
-        font-size: 16px;
+        font-size: 15px;
+        font-weight: 600;
         border-radius: 8px;
         cursor: pointer;
         transition: 0.3s;
       }
 
       button:hover {
-        transform: scale(1.03);
+        transform: scale(1.02);
       }
 
       /* LINK */
       .link {
-        margin-top: 15px;
-        font-size: 14px;
+        margin-top: 12px;
+        font-size: 13px;
       }
 
       .link a {
         color: #118ab2;
         text-decoration: none;
+        font-weight: 600;
       }
 
       .link a:hover {
@@ -181,20 +197,19 @@
       .error {
         color: red;
         font-size: 13px;
-        margin-top: 10px;
+        margin-top: 8px;
       }
 
       /* FOOTER */
       .footer {
-        position: static;
-        bottom: 0;
+        flex-shrink: 0;
         width: 100%;
         text-align: center;
-        padding: 12px;
+        padding: 10px 16px;
         background: linear-gradient(135deg, #df78e7, #2cbcdc);
         color: white;
-        font-size: 14px;
-        margin-top: 0px;
+        font-size: 13px;
+        z-index: 10;
       }
 
       .footer a {
@@ -203,105 +218,55 @@
         margin: 0 8px;
       }
 
-      /* RESPONSIVE */
-      @media (max-width: 900px) {
-        .container {
-          flex-direction: column;
-        }
-
-        .left {
-          height: 40vh;
-        }
-
-        .right {
-          justify-content: center;
-          padding: 20px;
-        }
+      .footer p {
+        margin-top: 4px;
+        font-size: 12px;
       }
-      @media (max-width: 768px) {
-        body {
-          align-items: flex-start;
-        }
 
-        .chat-container {
-          width: 100%;
-          height: 100vh;
-          border-radius: 0;
-        }
+      /* =========================
+   RESPONSIVE
+========================= */
 
-        .chat-header {
-          height: 50px;
-          font-size: 16px;
-        }
-
-        .online-bar {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 5px;
-        }
-
-        .color-picker {
-          width: 100%;
-        }
-
-        .chat-filters {
-          display: flex;
-          overflow-x: auto;
-          white-space: nowrap;
-        }
-
-        .chat-filters button {
-          flex: 0 0 auto;
-        }
-
-        .chat-body {
-          padding: 8px;
-        }
-
-        .message {
-          max-width: 85%;
-          font-size: 13px;
-        }
-
-        .chat-footer {
-          position: sticky;
-          bottom: 0;
-          background: #f0f0f0;
-          padding: 6px;
-        }
-
-        .chat-footer input {
-          height: 38px;
-          font-size: 14px;
-        }
-
-        .send-btn {
-          width: 40px;
-          height: 38px;
-          font-size: 16px;
-        }
-
+      @media (max-width: 850px) {
         .container {
           flex-direction: column;
+          flex: 1 0 auto;
         }
 
         .left {
-          height: 35vh;
+          flex: 1;
+          height: auto;
+          min-height: 200px;
+        }
+
+        .brand {
+          font-size: 30px;
+          top: 15px;
         }
 
         .right {
-          padding: 20px;
+          flex: none;
+          display: flex;
           justify-content: center;
+          align-items: center;
+          padding: 16px;
+          background: #2cbcdc;
         }
 
         .card {
           width: 100%;
-          max-width: 320px;
+          max-width: 350px;
+          padding: 20px 22px;
+          margin: 0;
+        }
+
+        .logo img {
+          width: 65px;
         }
 
         .footer {
-          width: 100%;
           font-size: 12px;
+          padding: 8px 12px;
         }
       }
     </style>

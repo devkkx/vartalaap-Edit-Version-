@@ -79,6 +79,7 @@ public class FileController {
             response.put("fileName", file.getOriginalFilename());
             response.put("fileType", file.getContentType());
             response.put("filePath", "/uploads/" + fileName);
+            response.put("timestamp", msg.getUploadTime());
 
             return response;
 

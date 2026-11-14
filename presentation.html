@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vartalaap Presentation — 6 Slide Complete System Deck</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #111; color: #fff; overflow: hidden; height: 100vh; width: 100vw; display: flex; flex-direction: column; }
+
+    .slide-container { flex: 1; position: relative; width: 100%; height: 100%; }
+    .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; padding: 35px 50px; background: #f5f7fa; color: #222; opacity: 0; transition: opacity 0.4s ease; }
+    .slide.active { display: flex; opacity: 1; }
+
+    /* Dark Title Slide */
+    .slide.dark { background: #38006c; color: #fff; justify-content: center; align-items: center; text-align: center; }
+
+    /* Header */
+    .header { height: 65px; background: #38006c; color: #fff; margin: -35px -50px 20px -50px; padding: 0 50px; display: flex; align-items: center; justify-content: space-between; border-bottom: 4px solid #2cbcdc; }
+    .header h2 { font-size: 21px; color: #fff; font-weight: 700; }
+    .header span { font-size: 11px; color: #2cbcdc; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* Content Layout */
+    .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; align-items: center; }
+    .content-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; flex: 1; align-items: center; }
+
+    .card { background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); border-top: 4px solid #2cbcdc; height: 100%; display: flex; flex-direction: column; }
+    .card.magenta { border-top-color: #df78e7; }
+    .card.purple { border-top-color: #38006c; }
+    .card.red { border-top-color: #d9534f; }
+    .card h3 { font-size: 16px; color: #38006c; margin-bottom: 8px; font-weight: 700; }
+
+    /* Flow Step Row */
+    .flow-row { background: #fff; border-radius: 8px; padding: 12px 18px; margin-bottom: 10px; border-left: 5px solid #2cbcdc; box-shadow: 0 4px 10px rgba(0,0,0,0.04); }
+    .flow-row h4 { font-size: 15px; color: #38006c; font-weight: 700; margin-bottom: 3px; }
+    .flow-row p { font-size: 12.5px; color: #444; line-height: 1.35; }
+
+    ul.bullet-list { list-style: none; }
+    ul.bullet-list li { margin-bottom: 8px; font-size: 13px; color: #444; line-height: 1.4; position: relative; padding-left: 16px; }
+    ul.bullet-list li::before { content: "•"; color: #2cbcdc; font-size: 18px; position: absolute; left: 0; top: -3px; }
+
+    /* Controls Bar */
+    .controls { height: 50px; background: #1a1a1a; display: flex; align-items: center; justify-content: space-between; padding: 0 25px; border-top: 1px solid #333; z-index: 1000; }
+    .btn { background: #2cbcdc; color: #fff; border: none; padding: 8px 16px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 13px; }
+    .btn:hover { background: #1fa2c1; }
+    .slide-num { font-size: 13px; color: #aaa; font-weight: 600; }
+
+    .spec-badge { display: inline-block; background: rgba(44, 188, 220, 0.15); color: #2cbcdc; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; margin: 3px; }
+  </style>
+</head>
+<body>
+
+  <div class="slide-container">
+    
+    <!-- SLIDE 1: Title & Executive Overview -->
+    <div class="slide dark active">
+      <h1 style="font-size: 46px; color: #2cbcdc; margin-bottom: 8px; font-family: cursive;">VARTALAAP (वार्तालाप)</h1>
+      <p style="font-size: 19px; color: #df78e7; margin-bottom: 22px; font-weight: 600;">Next-Gen Real-Time Collaborative Messaging & Team Workflow System</p>
+      <div style="margin-bottom: 25px;">
+        <span class="spec-badge">WHAT WE HAVE DONE</span>
+        <span class="spec-badge">WHAT WE HAVE USED</span>
+        <span class="spec-badge">HOW IT WORKS</span>
+        <span class="spec-badge">WHAT WE HAVE TO USE</span>
+      </div>
+      <p style="font-size: 13.5px; color: #ccc;">Presented by <strong>devkkx</strong> • 6-Slide Complete System Presentation (Use ← / → Arrow Keys)</p>
+    </div>
+
+    <!-- SLIDE 2: WHAT WE HAVE USED -->
+    <div class="slide">
+      <div class="header">
+        <div>
+          <span>SLIDE 2 OF 6 — TECHNOLOGY STACK</span>
+          <h2>WHAT WE HAVE USED: Implemented Technology Stack</h2>
+        </div>
+      </div>
+      <div class="content-grid">
+        <div class="card">
+          <h3>💻 Core Backend & Persistence</h3>
+          <ul class="bullet-list">
+            <li><strong>Java 21 & Spring Boot 2.7.18</strong>: Core server framework providing REST endpoints, security, and JPA transaction management.</li>
+            <li><strong>MySQL 8.0 Relational DB</strong>: Stores messages, users, tasks, reminders, and decision logs cleanly.</li>
+            <li><strong>Spring Data JPA / Hibernate</strong>: Object-relational mapping layer.</li>
+          </ul>
+        </div>
+        <div class="card magenta">
+          <h3>⚡ Sockets, Mail & AI Services</h3>
+          <ul class="bullet-list">
+            <li><strong>STOMP WebSockets & SockJS</strong>: Full-duplex socket channel for sub-5ms message transmission.</li>
+            <li><strong>Spring Mail (Gmail SMTP)</strong>: Real-time 2-step OTP verification for user signup.</li>
+            <li><strong>Ollama Local AI Interface</strong>: Local LLM service performing document summarization and Q&A.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: HOW IT WORKS -->
+    <div class="slide">
+      <div class="header">
+        <div>
+          <span>SLIDE 3 OF 6 — FLOW STRUCTURE</span>
+          <h2>HOW IT WORKS: End-to-End System & Data Flow Structure</h2>
+        </div>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+        <div class="flow-row">
+          <h4>1. User Registration & Email OTP Flow</h4>
+          <p>User inputs Gmail address → Spring Mail dispatches 6-digit OTP → User verifies via <code>/auth/verify-otp</code> → Password fields unlock (6-32 chars) → Account saved in MySQL.</p>
+        </div>
+        <div class="flow-row">
+          <h4>2. STOMP Socket Connection Setup</h4>
+          <p>Browser opens TCP socket to <code>ws://localhost:8081/chat</code> → Upgrades to STOMP protocol → <code>ChatHandler</code> maps session → Broadcasts <code>JOIN:username</code> system notice.</p>
+        </div>
+        <div class="flow-row">
+          <h4>3. Message Transmission & Database Persistence</h4>
+          <p>Sender transmits payload (<code>mode|sender|text</code>) → <code>ChatHandler</code> saves Message in MySQL → Auto-assigns DB <code>id</code> → Broadcasts <code>mode|sender|text|id</code> over WebSocket.</p>
+        </div>
+        <div class="flow-row">
+          <h4>4. Real-Time 3-Dots Live Edit & Delete Sync</h4>
+          <p>Message renders with 3-dots (⋮) → Edit sends <code>PUT /messages/{id}</code> (broadcasts <code>EDIT|id|text</code>); Delete sends <code>DELETE /messages/{id}</code> (broadcasts <code>DELETE|id</code>) → Live DOM update.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: WHAT WE HAVE DONE (PART 1: MESSAGING, SECURITY & CONTROLS) -->
+    <div class="slide">
+      <div class="header">
+        <div>
+          <span>SLIDE 4 OF 6 — ALL IMPLEMENTED FEATURES (PART 1)</span>
+          <h2>WHAT WE HAVE DONE: Messaging, Security & Controls</h2>
+        </div>
+      </div>
+      <div class="content-grid-3">
+        <div class="card">
+          <h3>✉️ Gmail SMTP Email OTP</h3>
+          <ul class="bullet-list">
+            <li>2-Step verification flow via Gmail SMTP.</li>
+            <li>Dispatches 6-digit OTP code to user inbox.</li>
+            <li>Unlocks 6-32 char password fields upon verification.</li>
+            <li>Eliminates spam & unverified account signups.</li>
+          </ul>
+        </div>
+        <div class="card magenta">
+          <h3>⋮ 3-Dots Edit & Delete</h3>
+          <ul class="bullet-list">
+            <li>Renders 3-dots button (⋮) immediately upon send.</li>
+            <li><strong>✏️ Live Edit</strong>: `PUT /messages/{id}` updates MySQL, marks `edited=true`, broadcasts `EDIT|id|text`.</li>
+            <li><strong>🗑️ Live Delete</strong>: `DELETE /messages/{id}` removes DB record, broadcasts `DELETE|id`.</li>
+          </ul>
+        </div>
+        <div class="card purple">
+          <h3>⚡ Modes & Presence</h3>
+          <ul class="bullet-list">
+            <li>5 Communication Modes: Work 🧑‍💼, Personal 💕, Study 📚, Casual 🤙, and AI 🧠.</li>
+            <li>Live online presence bar (`USERS:` broadcast).</li>
+            <li>Customizable bubble color picker.</li>
+            <li>12-Hour formatted message timestamps.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: WHAT WE HAVE DONE (PART 2: WORKFLOW & AI MODULES) -->
+    <div class="slide">
+      <div class="header">
+        <div>
+          <span>SLIDE 5 OF 6 — ALL IMPLEMENTED FEATURES (PART 2)</span>
+          <h2>WHAT WE HAVE DONE: Workflow & AI Modules</h2>
+        </div>
+      </div>
+      <div class="content-grid-3">
+        <div class="card magenta">
+          <h3>🧠 Decision Memory</h3>
+          <ul class="bullet-list">
+            <li>Auto-indexes consensus choices in MySQL.</li>
+            <li>Natural-language AI recall (`/decisions/ask`).</li>
+            <li>Ask AI past choices without scrolling chat.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>📋 Task Tracker & Reminders</h3>
+          <ul class="bullet-list">
+            <li><strong>Task Tracker</strong>: Extract text into task cards with assignees, deadlines, & drawer checklist.</li>
+            <li><strong>Scheduled Reminders</strong>: Time-triggered alerts for team members in dedicated drawer.</li>
+          </ul>
+        </div>
+        <div class="card purple">
+          <h3>📄 Document AI & Mobile UI</h3>
+          <ul class="bullet-list">
+            <li><strong>Document AI</strong>: PDF/image uploads, instant AI summarization & inline Q&A modal.</li>
+            <li><strong>Mobile UI</strong>: Phone viewport scaling (`loginpic.png`), header dropdown (`⚡ Menu ▾`), zero-overflow cards.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: WHAT WE HAVE TO USE -->
+    <div class="slide dark">
+      <h1 style="font-size: 34px; color: #2cbcdc; margin-bottom: 8px;">WHAT WE HAVE TO USE: Future Roadmap</h1>
+      <p style="font-size: 15px; color: #df78e7; margin-bottom: 18px; font-weight: bold;">4 Next-Gen Technologies & Innovations to Integrate:</p>
+      
+      <div style="text-align: left; max-width: 880px; margin: 0 auto 18px auto; line-height: 1.45; font-size: 13.5px; color: #eee;">
+        <p style="margin-bottom: 8px;"><strong>1. ⚠️ AI Conflict Detector</strong>: Sentiment & logic engine monitoring multi-channel conversations to flag conflicting decisions before coding starts.</p>
+        <p style="margin-bottom: 8px;"><strong>2. 🛡️ Zero-Knowledge Redaction Engine</strong>: Client-side cryptographic masking of API keys & credentials before socket transmission.</p>
+        <p style="margin-bottom: 8px;"><strong>3. 🌐 Speech Subtitle & Tone Normalizer</strong>: Voice note transcription with automatic professional tone transformation.</p>
+        <p style="margin-bottom: 8px;"><strong>4. 📊 Predictive Thread Summarizer</strong>: Catch-up AI converting unread 100+ message threads into visual decision trees.</p>
+      </div>
+
+      <p style="font-size: 16px; color: #2cbcdc; font-weight: bold;">🏁 Conclusion: Vartalaap unifies real-time messaging with automated team workflow synthesis.</p>
+    </div>
+
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="prevSlide()">◀ Previous</button>
+    <div class="slide-num" id="slideNum">Slide 1 of 6</div>
+    <button class="btn" onclick="nextSlide()">Next ▶</button>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const slideNum = document.getElementById('slideNum');
+
+    function updateSlides() {
+      slides.forEach((s, idx) => {
+        s.classList.remove('active');
+        if (idx === currentSlide) s.classList.add('active');
+      });
+      slideNum.innerText = `Slide ${currentSlide + 1} of ${slides.length}`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlides();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlides();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+  </script>
+</body>
+</html>

@@ -23,10 +23,20 @@ public class Message {
 
     private LocalDateTime timestamp = LocalDateTime.now();
 
+    private boolean edited = false;
+
     // Getters & Setters
 
     public int getId() {
         return id;
+    }
+
+    public boolean isEdited() {
+        return edited;
+    }
+
+    public void setEdited(boolean edited) {
+        this.edited = edited;
     }
 
     public String getSender() {
